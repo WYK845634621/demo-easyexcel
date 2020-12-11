@@ -35,7 +35,7 @@ public class DemoDataListener extends AnalysisEventListener<Employee> {
      */
     @Override
     public void invoke(Employee employee, AnalysisContext analysisContext) {
-        log.info("解析这一条数据: {}" + JSON.toJSONString(employee));
+        log.info("解析这一条数据:{}" + JSON.toJSONString(employee));
         list.add(employee);
         if (list.size() >= BATCH_COUNT){
             mapper.saveBatch(list);

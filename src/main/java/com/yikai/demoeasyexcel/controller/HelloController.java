@@ -7,8 +7,12 @@ import com.yikai.demoeasyexcel.mapper.EmployeeMapper;
 import com.yikai.demoeasyexcel.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,6 +40,7 @@ public class HelloController {
         return "hello";
     }
 
+    //读取本地文件: 单个sheet
     @GetMapping("/start")
     public String start(){
         long start = System.currentTimeMillis();
@@ -44,4 +49,18 @@ public class HelloController {
         long end = System.currentTimeMillis();
         return "" + (end - start);
     }
+
+
+    /**
+     * 读取单个sheet
+     */
+    @PostMapping("/startOne")
+    public String startOne(@RequestParam("file") MultipartFile file) throws IOException {
+        long start = System.currentTimeMillis();
+        EasyExcel.read(file.getInputStream(),Employee.class,new DemoDataListener(mapper)).sheet().doRead();
+        long end = System.currentTimeMillis();
+        return "" + (end - start);
+    }
+
+
 }
