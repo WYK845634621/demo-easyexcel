@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yikai.demoeasyexcel.mapper.EmployeeMapper">
+
+
+    <select id="all" resultType="com.yikai.demoeasyexcel.entity.Employee">
+        select * from easyexcel.employee
+    </select>
+
+    <insert id="saveBatch" parameterType="com.yikai.demoeasyexcel.entity.Employee">
+        insert into employee(last_name, create_time, num)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.lastName}, #{item.createTime}, #{item.num})
+        </foreach>
+    </insert>
+
+
+
+</mapper>

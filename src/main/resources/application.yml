@@ -1,0 +1,11 @@
+server:
+  port: 9990
+spring:
+  datasource:
+    #   数据源基本配置
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.222.21:3306/easyexcel
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
