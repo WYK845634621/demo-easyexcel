@@ -63,4 +63,13 @@ public class HelloController {
     }
 
 
+    @PostMapping("/readAllSheet")
+    public String readAllSheet(@RequestParam("file") MultipartFile file) throws IOException {
+        long start = System.currentTimeMillis();
+        EasyExcel.read(file.getInputStream(),Employee.class,new DemoDataListener(mapper)).doReadAll();
+        long end = System.currentTimeMillis();
+        return "" + (end - start);
+    }
+
+
 }
